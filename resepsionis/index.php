@@ -56,16 +56,34 @@
                 if(isset($_GET['daritgl'])&&isset($_GET['sampaitgl'])){
                     $dari = $_GET['daritgl'];
                     $sampai = $_GET['sampaitgl'];
-                    $sql = mysqli_query($con, "SELECT * FROM tb_reservasi INNER JOIN tb_jkamar WHERE tb_reservasi.res_tipe = tb_jkamar.jk_id && date(res_cekin) > '$dari' && date(res_cekin) < '$sampai'");
+                    $sql = mysqli_query($con, "SELECT * 
+                        FROM 
+                        tb_reservasi INNER JOIN tb_jkamar 
+                        WHERE 
+                        tb_reservasi.res_tipe = tb_jkamar.jk_id 
+                        && 
+                        date(res_cekin) > '$dari' 
+                        && 
+                        date(res_cekin) < '$sampai'");
                     $ind = "visible";
                 }else if(isset($_GET['namacari'])){
                     $nama = $_GET['namacari'];
-                    $sql = mysqli_query($con, "SELECT * FROM tb_reservasi INNER JOIN tb_jkamar WHERE tb_reservasi.res_tipe = tb_jkamar.jk_id && res_namatamu='$nama'");
+                    $sql = mysqli_query($con, "SELECT * 
+                        FROM 
+                        tb_reservasi INNER JOIN tb_jkamar 
+                        WHERE 
+                        tb_reservasi.res_tipe = tb_jkamar.jk_id 
+                        && 
+                        LOWER(res_namatamu)=LOWER('$nama')");
                     $ind = "visible";
                 }
                 
                 else{
-                    $sql = mysqli_query($con, "SELECT * FROM tb_reservasi INNER JOIN tb_jkamar WHERE tb_reservasi.res_tipe = tb_jkamar.jk_id");
+                    $sql = mysqli_query($con, "SELECT * 
+                        FROM 
+                        tb_reservasi INNER JOIN tb_jkamar  
+                        WHERE  
+                        tb_reservasi.res_tipe = tb_jkamar.jk_id");
                     $ind = "invisible";
                 }
             ?>
