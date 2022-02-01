@@ -22,11 +22,11 @@
                     <div class="panel d-flex flex-row justify-content-evenly">
                         <div class="form-group">
                             <label>Dari Tanggal</label>
-                            <input type="date" name="daritgl" class="form-control">
+                            <input type="date" name="daritgl" class="form-control" required="required">
                         </div>
                         <div class="form-group">
                             <label>Sampai Tanggal</label>
-                            <input type="date" name="sampaitgl" class="form-control">
+                            <input type="date" name="sampaitgl" class="form-control" required="required">
                         </div>
                         <div class="form-group d-flex align-items-end">
                             <input type="submit" class="btn btn-primary" value="Filter">
@@ -37,12 +37,12 @@
             </div>
 
             <div class="col-md-4">
-                <h6>Cari Nama</h6>
+                <h6>Cari Nama Tamu</h6>
                 <form action="index.php" method="get">
                     <div class="panel d-flex flex-row">
                         <div class="form-group mx-2">
                             <label>Isi Nama</label>
-                            <input type="text" name="namacari" class="form-control">
+                            <input type="text" name="namacari" class="form-control" required="required">
                         </div>
                         <div class="form-group d-flex align-items-end">
                             <input type="submit" class="btn btn-primary" value="Cari">
@@ -56,16 +56,16 @@
                 if(isset($_GET['daritgl'])&&isset($_GET['sampaitgl'])){
                     $dari = $_GET['daritgl'];
                     $sampai = $_GET['sampaitgl'];
-                    $sql = mysqli_query($con, "SELECT * FROM tb_reservasi WHERE date(res_cekin) > '$dari' and date(res_cekin) < '$sampai'");
+                    $sql = mysqli_query($con, "SELECT * FROM tb_reservasi INNER JOIN tb_jkamar WHERE tb_reservasi.res_tipe = tb_jkamar.jk_id && date(res_cekin) > '$dari' && date(res_cekin) < '$sampai'");
                     $ind = "visible";
                 }else if(isset($_GET['namacari'])){
                     $nama = $_GET['namacari'];
-                    $sql = mysqli_query($con, "SELECT * FROM tb_reservasi WHERE res_namapesan='$nama' || res_namatamu='$nama' ");
+                    $sql = mysqli_query($con, "SELECT * FROM tb_reservasi INNER JOIN tb_jkamar WHERE tb_reservasi.res_tipe = tb_jkamar.jk_id && res_namatamu='$nama'");
                     $ind = "visible";
                 }
                 
                 else{
-                    $sql = mysqli_query($con, "SELECT * FROM tb_reservasi");
+                    $sql = mysqli_query($con, "SELECT * FROM tb_reservasi INNER JOIN tb_jkamar WHERE tb_reservasi.res_tipe = tb_jkamar.jk_id");
                     $ind = "invisible";
                 }
             ?>
@@ -78,37 +78,34 @@
         <table class="table table-bordered table-striped table-hover" id="table-datatable">
             <thead>
                 <tr>
+                    <th style="width:1%;">No</th>
                     <th>Nama Pemesan</th>
                     <th>Email</th>
                     <th>No Handphone</th>
                     <th>Nama Tamu</th>
                     <th>Tipe Kamar</th>
-                    <th>Jumlah Kamar</th>
+                    <th>Kamar</th>
                     <th>Cek In</th>
                     <th>Cek Out</th>
                 </tr> 
             </thead>
             <tbody>
                 <?php
-
+                $no = 1;
                 while($d = mysqli_fetch_array($sql)){
-                    $tipe = $d['res_tipe'];                    
-                    $sql2 = mysqli_query($con, "SELECT * FROM tb_jkamar WHERE jk_id=$tipe");
-                    $d2 = mysqli_fetch_array($sql2);
                     
                     ?>
 
                     <tr>
+                        <td><?php echo $no++?></td>
                         <td><?php echo $d['res_namapesan'] ?></td>
                         <td><?php echo $d['res_email']?></td>
                         <td><?php echo $d['res_nohp']?></td>
                         <td><?php echo $d['res_namatamu']?></td>
-                        <td><?php echo $d2['jk_tipe']?></td>
+                        <td><?php echo $d['jk_tipe']?></td>
                         <td><?php echo $d['res_jumlah']?></td>
                         <td><?php echo $d['res_cekin']?></td>
                         <td><?php echo $d['res_cekout']?></td>
-                        
-                        
                     </tr>
                 <?php } ?>
             </tbody>

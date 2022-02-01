@@ -26,6 +26,7 @@
         <table class="table table-bordered table-striped table-hover" id="table-datatable">
             <thead>
                 <tr>
+                    <th style="width: 1%;" >No</th>
                     <th>Tipe Kamar</th>
                     <th>Jumlah</th>
                     <th>Fasilitas</th>
@@ -35,19 +36,14 @@
             <tbody>
                 <?php
                 include '../config.php';
-                $sql = mysqli_query($con, "SELECT * FROM tb_fkamar");
-                
+                $sql = mysqli_query($con, "SELECT * FROM tb_fkamar INNER JOIN tb_jkamar WHERE tb_fkamar.fk_tipe = tb_jkamar.jk_id");
+                $no = 1;
                 while($d=mysqli_fetch_array($sql)){
-                    $tipe = $d['fk_tipe'];                    
-                    $sql2 = mysqli_query($con, "SELECT * FROM tb_jkamar WHERE jk_id=$tipe");
-                    $d2 = mysqli_fetch_array($sql2);
+                    
                     ?>
                     <tr>
-                        <td>
-                        <?php
-                            echo $d2['jk_tipe'];
-                        
-                        ?></td>
+                        <td><?php echo $no++?></td>
+                        <td><?php echo $d['jk_tipe'];?></td>
                         <td><?php echo $d['fk_jumlah']?></td>
                         <td><?php echo $d['fk_fasilitas']?></td>
                         <td><a href="fkamar_edit.php?id=<?php echo $d['fk_id']?>" class="btn btn-sm btn-warning">Edit</a>&nbsp;<a href="action/fk_delete.php?id=<?php echo $d['fk_id']?>" class="btn btn-sm btn-danger">hapus</a></td>
@@ -55,9 +51,6 @@
                 <?php } ?>
             </tbody>
             
-           
-
-
 
         </table>
         <div class="row">
