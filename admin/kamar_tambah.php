@@ -28,7 +28,6 @@
                 <h3 class="text-center">Tambah Data Kamar</h3>
                 <hr>
                 <form action="action/jk_insert.php?" method="post">
-                    <input type="hidden" name="id" >
                     <div class="form-group">
                         <label>Nama Tipe Kamar</label>
                         <input type="text" name="tipe" class="form-control"  required="required">
