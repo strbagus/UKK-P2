@@ -29,7 +29,7 @@
                     <br>
                     <div class="form-group d-flex justify-content-between">
                         <input type="submit" value="Masuk" class="btn btn-primary" name="Masuk">
-                        <a href="index.php" class="btn btn-primary">Sebagai Tamu</a>
+                        <a href="index.php" class="btn btn-primary">Halaman Tamu</a>
                     </div>
                 </form>
             </div>
