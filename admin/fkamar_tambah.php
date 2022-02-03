@@ -31,7 +31,7 @@
         <br><br><br><br><br><br>
         <div class="row">
             <div class="col-md-4 mx-auto bg-light p-5">
-                <h3 class="text-center">Tambah Data Kamar</h3>
+                <h3 class="text-center">Tambah Fasilitas Kamar</h3>
                 <hr>
                 <form action="action/fk_insert.php?" method="post">
                     <div class="form-group">
