@@ -53,28 +53,31 @@
             </div>
 
             <?php 
+                $dari = $_GET['daritgl'];
+                $sampai = $_GET['sampaitgl'];
+                $nama = $_GET['namacari'];
                 if(isset($_GET['daritgl'])&&isset($_GET['sampaitgl'])){
-                    $dari = $_GET['daritgl'];
-                    $sampai = $_GET['sampaitgl'];
                     $sql = mysqli_query($con, "SELECT * 
                         FROM 
                         tb_reservasi INNER JOIN tb_jkamar 
-                        WHERE 
+                        ON
                         tb_reservasi.res_tipe = tb_jkamar.jk_id 
-                        && 
+                        WHERE 
                         date(res_cekin) > '$dari' 
                         && 
                         date(res_cekin) < '$sampai'");
                     $ind = "visible";
                 }else if(isset($_GET['namacari'])){
-                    $nama = $_GET['namacari'];
+                    
                     $sql = mysqli_query($con, "SELECT * 
                         FROM 
                         tb_reservasi INNER JOIN tb_jkamar 
-                        WHERE 
+                        ON
                         tb_reservasi.res_tipe = tb_jkamar.jk_id 
-                        && 
-                        LOWER(res_namatamu)=LOWER('$nama')");
+                        WHERE 
+                        LOWER(res_namatamu)=LOWER('$nama')
+                        OR
+                        LOWER(res_namapesan)=LOWER('$nama')");
                     $ind = "visible";
                 }
                 
@@ -82,10 +85,12 @@
                     $sql = mysqli_query($con, "SELECT * 
                         FROM 
                         tb_reservasi INNER JOIN tb_jkamar  
-                        WHERE  
+                        ON
                         tb_reservasi.res_tipe = tb_jkamar.jk_id");
                     $ind = "invisible";
                 }
+                
+
             ?>
         </div>
         <br><hr>
@@ -105,6 +110,7 @@
                     <th>Kamar</th>
                     <th>Cek In</th>
                     <th>Cek Out</th>
+                    <th>Aksi</th>
                 </tr> 
             </thead>
             <tbody>
@@ -124,6 +130,10 @@
                         <td><?php echo $d['res_jumlah']?></td>
                         <td><?php echo $d['res_cekin']?></td>
                         <td><?php echo $d['res_cekout']?></td>
+                        <td class="text-center">
+                            <a href="reservasiEdit.php?id=<?php echo $d['res_id'];?>" class="m-1 btn btn-sm btn-warning">Edit</a>
+                            <a href="action/reservasiDelete.php?id=<?php echo $d['res_id'];?>" class="m-1 btn btn-sm btn-danger">Hapus</a>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>
