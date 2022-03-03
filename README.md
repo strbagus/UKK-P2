@@ -25,7 +25,7 @@ Pertama, Membuat Directory/Folder lalu masuk folder.
     
 Kedua, clone repository.
 
-    git clone https://github.com/strbagus/UKK-P3.git
+    git clone https://github.com/strbagus/UKK-P2.git
 
 ## Catatan
 + Import sql ke phpmyadmin.
@@ -36,7 +36,7 @@ Kedua, clone repository.
 + Login resepsionis. Username = "adit", Password = "adit123".
 
 ## Component
-+ Framework CSS menggunakan [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/ "Bootstrap 5").
-+ Icon menggunakan [Fontawesome](https://fontawesome.com/v5/search "Fontawesome 5").
++ Framework CSS menggunakan [Bootstrap5](https://getbootstrap.com/docs/5.0/getting-started/introduction/ "Bootstrap 5").
++ Icon menggunakan [FontawesomeV5](https://fontawesome.com/v5/search "Fontawesome 5").
 + Table menggunakan [Datatables](https://www.datatables.net/ "Datatables").
 + PDF converter menggunakan [Dompdf](https://github.com/dompdf/dompdf).
