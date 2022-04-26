@@ -53,9 +53,13 @@
             </div>
 
             <?php 
+            if(isset($_GET['daritgl'])){
                 $dari = $_GET['daritgl'];
                 $sampai = $_GET['sampaitgl'];
+            }
+            if(isset($_GET['namacari'])){
                 $nama = $_GET['namacari'];
+            }
                 if(isset($_GET['daritgl'])&&isset($_GET['sampaitgl'])){
                     $sql = mysqli_query($con, "SELECT * 
                         FROM 
